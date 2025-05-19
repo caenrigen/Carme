@@ -93,7 +93,8 @@ if [[ "$(hostname -s)" == "${CARME_MASTER}" ]];then
       log "start Code-Server at ${CARME_MASTER_IP}:${TA_PORT}"
       code-server --auth none --disable-telemetry --bind-addr ${CARME_MASTER_IP}:${TA_PORT} --app-name CARME-IDE --user-data-dir "${HOME}/.local/share/code-server" --extensions-dir "${HOME}/.local/share/code-server/extensions" &
     else
-      die "cannot start Code-Server (no executable found)"
+      # die "cannot start Code-Server (no executable found)"
+      echo "Code-Server not found, moving on"
     fi
   fi
   #---------------------------------------------------------------------------------------------------------------------------------
