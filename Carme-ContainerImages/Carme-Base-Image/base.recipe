@@ -53,7 +53,7 @@ MirrorURL: http://ftp.de.debian.org/debian/
   bash /opt/install/install_jupyterlab.sh
 
   # install codeserver
-  bash /opt/install/install_codeserver.sh
+  # bash /opt/install/install_codeserver.sh
 
   # build and install gpi 
   #bash /opt/install/install_gpi.sh
