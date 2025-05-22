@@ -120,9 +120,10 @@ if [[ ${CARME_SYSTEM} == "multi" ]]; then
   log "checking ssh connection to compute nodes..."
 
   for COMPUTE_NODE in ${CARME_NODE_LIST[@]}; do
+    echo "Checking ssh connection to ${COMPUTE_NODE}..."
     if ! ssh -F /dev/null -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking="no" $COMPUTE_NODE true &>/dev/null
     then
-      die "[install_system.sh] ssh to ${MY_COMPUTE_NODE} failed. Carme-demo requires that you ssh to the compute-nodes without a password."
+      die "[install_system.sh] ssh to ${COMPUTE_NODE} failed. Carme-demo requires that you ssh to the compute-nodes without a password."
     fi
   done
 fi
