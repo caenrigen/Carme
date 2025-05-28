@@ -67,12 +67,12 @@ cat << EOF >> ${FILE_PROXY_STATIC}
 [http.routers]
   [http.routers.dashboard]
     entryPoints = ["dashboard"]
-    rule = "Host(\`localhost\`)"
+    rule = "Host(\`localhost\`) || Host(\`192.168.104.6\`)"
     service = "api@internal"
 
   [http.routers.carme]
     entryPoints = ["https"]
-    rule = "Host(\`localhost\`)"
+    rule = "Host(\`localhost\`) || Host(\`192.168.104.6\`)"
     service = "carme"
 
 [http.services]
@@ -93,7 +93,7 @@ touch ${FILE_PROXY_TRAEFIK}
 cat << EOF >> ${FILE_PROXY_TRAEFIK}
 # traefik.toml
 [log]
-  level = "INFO"
+  level = "DEBUG"
   filePath = "/var/log/traefik/traefik.log"
 
 [providers]
