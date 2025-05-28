@@ -520,28 +520,7 @@ Type a short name to identify this GPU. [short name]: "
   elif [[ ${CARME_SYSTEM} == "multi" ]]; then
     
     for COMPUTE_NODE in ${CARME_NODE_LIST[@]}; do
-      ssh ${COMPUTE_NODE} 'nvidia-smi --query-gpu=gpu_name --format=csv >/dev/null 2>&1'
-
-      # set cluster compute node as cpu or gpu
-      if [ $? -eq 0 ]; then
-        REPLY=""
-        CHECK_DEVICE_MESSAGE=$"
-Do you want compute node ${COMPUTE_NODE} to be a CPU or GPU node (both are not allowed)?
-Type \`cpu\` or \`gpu\`, respectively. [cpu/gpu]:"
-        while ! [[ ${REPLY} == "cpu" || ${REPLY} == "gpu" ]] 
-        do
-          read -rp "${CHECK_DEVICE_MESSAGE} " REPLY
-          if [[ ${REPLY} == "cpu" ]]; then
-            SYSTEM_DEVICE="cpu"
-          elif [[ ${REPLY} == "gpu" ]]; then
-            SYSTEM_DEVICE="gpu"
-          else
-            CHECK_DEVICE_MESSAGE=$'You did not type `cpu` or `gpu`. Please try again [cpu/gpu]:'
-          fi
-        done
-      else
-        SYSTEM_DEVICE="cpu"
-      fi
+      SYSTEM_DEVICE="cpu"
 
       # set cluster parameters
       REAL_MEMORY=$(ssh ${COMPUTE_NODE} 'grep "^MemTotal:" /proc/meminfo' | awk '{print int($2/1024)}')
